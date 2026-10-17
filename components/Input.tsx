@@ -22,7 +22,13 @@ export default function Input({
   editingTask: Task | null;
   setEditingTask: React.Dispatch<React.SetStateAction<Task | null>>;
 }) {
-  const { createTask, updateTask, isCreating } = useContext(TaskContext);
+const taskContext = useContext(TaskContext);
+
+if (!taskContext) {
+  throw new Error("Input must be inside TaskProvider");
+}
+
+const { createTask, updateTask, isCreating } = taskContext;
 
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");

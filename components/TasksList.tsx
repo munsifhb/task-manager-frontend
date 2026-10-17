@@ -2,6 +2,7 @@
 import { ChevronDown, ChevronUp, Circle, CircleCheckBig, Edit2Icon, LoaderCircle, Trash2Icon } from 'lucide-react'
 import React, { useState, useContext } from 'react'
 import { TaskContext } from '@/context/TaskContext';
+import type { Task } from "@/types/task";
 
 
 
@@ -13,9 +14,20 @@ export default function TasksList({
 
     const context = useContext(TaskContext);
 
-    const [openMore, setOpenMore] = useState<number | null>(null)
+if (!context) {
+  throw new Error("TasksList must be inside TaskProvider");
+}
 
-    const  { tasks,  loading, setTasks, updateTask, filterTask, setFilterTask } = context
+const {
+  tasks,
+  loading,
+  setTasks,
+  updateTask,
+  filterTask,
+  setFilterTask,
+} = context;
+
+const [openMore, setOpenMore] = useState<number | null>(null);
     
 
 const toggleComplete = async (
@@ -37,7 +49,7 @@ if (loading) {
 
 const deleteTask = async (id: number) => {
   try {
-    const response = await fetch(`http://localhost:3000/tasks/${id}`, {
+    const response = await fetch(`https://nest-task-manager-api.onrender.com/tasks/${id}`, {
       method: "DELETE",
       credentials: "include",
     });

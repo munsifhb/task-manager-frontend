@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -10,20 +11,13 @@ import {
   ResponsiveContainer,
 } from "recharts";
 
-
-type Task = {
-  id: number;
-  title: string;
-  completed: boolean;
-  dueDate: string;
-};
+import type { Task } from "@/types/task";
 
 export default function TaskProgressChart({
   tasks,
 }: {
   tasks: Task[];
 }) {
-
   const totalTasks = tasks.length;
 
   const completedTasks = tasks.filter(
@@ -36,45 +30,48 @@ export default function TaskProgressChart({
 
   const completionRate =
     totalTasks > 0
-      ? Math.round((completedTasks / totalTasks) * 100 ) 
+      ? Math.round((completedTasks / totalTasks) * 100)
       : 0;
 
-      const chartData = [
-  {
-    name: "Total",
-    tasks: totalTasks,
-  },
-  {
-    name: "Completed",
-    tasks: completedTasks,
-  },
-  {
-    name: "Pending",
-    tasks: pendingTasks,
-  },
-{
-    name: "Completion Rate",
-    tasks: completionRate
-}
-  
-];
+  const chartData = [
+    {
+      name: "Total",
+      tasks: totalTasks,
+    },
+    {
+      name: "Completed",
+      tasks: completedTasks,
+    },
+    {
+      name: "Pending",
+      tasks: pendingTasks,
+    },
+    {
+      name: "Completion Rate",
+      tasks: completionRate,
+    },
+  ];
 
-return (
-  <div className="w-full mt-5 h-80">
-    <ResponsiveContainer width="100%" height="100%">
-      <BarChart data={chartData}>
-        <CartesianGrid strokeDasharray="3 3" />
+  return (
+    <div className="mt-5 h-80 w-full">
+      <ResponsiveContainer width="100%" height="100%">
+        <BarChart data={chartData}>
+          <CartesianGrid strokeDasharray="3 3" />
 
-        <XAxis dataKey="name" />
+          <XAxis dataKey="name" />
 
-        <YAxis allowDecimals={false} />
+          <YAxis allowDecimals={false} />
 
-        <Tooltip />
+          <Tooltip />
 
-<Bar dataKey="tasks" fill="#2563eb"  barSize={30} radius={[6, 6, 0, 0]} />
-      </BarChart>
-    </ResponsiveContainer>
-  </div>
-);
-
+          <Bar
+            dataKey="tasks"
+            fill="#2563eb"
+            barSize={30}
+            radius={[6, 6, 0, 0]}
+          />
+        </BarChart>
+      </ResponsiveContainer>
+    </div>
+  );
 }

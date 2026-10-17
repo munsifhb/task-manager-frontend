@@ -25,13 +25,23 @@ export default function SideBar() {
   const router = useRouter();
   const pathname = usePathname();
 
-  const {
-    isOpenMenu,
-    setIsOpenMenu,
-    logout,
-  } = useContext(TaskContext);
+const taskContext = useContext(TaskContext);
+
+if (!taskContext) {
+  throw new Error("SideBar must be inside TaskProvider");
+}
+
+const {
+  isOpenMenu,
+  setIsOpenMenu,
+  logout,
+} = taskContext;
 
   const context = useContext(UserContext);
+
+  if (!context) {
+  throw new Error("SideBar must be inside TaskProvider");
+}
   
   
     const { users } = context;
@@ -282,7 +292,7 @@ export default function SideBar() {
                         : "text-gray-500 hover:bg-blue-50 hover:text-blue-600"
                     }
                     ${
-                        users.role === "ADMIN" ? "flex" : "hidden"
+                        users?.role === "ADMIN" ? "flex" : "hidden"
                     }
                   `}
                 >

@@ -7,11 +7,28 @@ import { UserContext } from '@/context/UserContext';
 
 export default function Header() {
 
-    const { isOpenMenu, setIsOpenMenu, tasks, search, setSearch, searchtasks} = useContext(TaskContext);
-      const context = useContext(UserContext);
- 
+   const taskContext = useContext(TaskContext);
 
-      const {users} = context;
+    if (!taskContext) {
+    throw new Error("Header must be inside TaskProvider");
+  }
+
+  const {
+    isOpenMenu,
+    setIsOpenMenu,
+    tasks,
+    search,
+    setSearch,
+    searchtasks,
+  } = taskContext;
+
+const userContext = useContext(UserContext);
+
+if (!userContext) {
+  throw new Error("Header must be inside UserProvider");
+}
+
+const { users } = userContext;
 
 
 //       const handleSearch = (e: React.FormEvent) => {
