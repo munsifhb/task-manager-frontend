@@ -1,11 +1,13 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import Image from "next/image";
 import google from "@/public/images/google-icon-logo-svgrepo-com.svg";
 import Link from "next/link";
 import { Eye, EyeOff, UserCheckIcon, ArrowRight, ShieldCheck } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { UserContext } from "@/context/UserContext";
+
 
 export default function page() {
   const [username, setUsername] = useState("");
@@ -17,6 +19,7 @@ export default function page() {
     password?: string;
     general?: string;
   }>({});
+  const userContext = useContext(UserContext);
 
   const togglePasswordVisibility = () => {
     setShowPassword((prevState) => !prevState);
@@ -72,8 +75,12 @@ export default function page() {
         return;
       }
 
-      console.log("Login successful");
-      router.push("/board");
+console.log("Login successful");
+
+await userContext?.getUsers();
+
+router.replace("/board");
+router.refresh();
     } catch (err) {
       setErrors({ general: "Cannot connect to the server." });
     } finally {
