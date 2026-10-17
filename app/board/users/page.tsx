@@ -5,6 +5,11 @@ import { UserContext } from "@/context/UserContext";
 
 export default function UsersPage() {
 const context = useContext(UserContext);
+
+if (!context) {
+  throw new Error("UsersPage must be inside UserProvider");
+}
+
 const { getAllUsers, allUsers, setAllUsers } = context;
 
 const [search, setSearch] = useState("");
