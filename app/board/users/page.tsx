@@ -20,9 +20,7 @@ const [deleteUser, setDeleteUser] = useState<any>(null);
 
 const users = allUsers ?? [];
 
-useEffect(() => {
-getAllUsers();
-}, []);
+
 
 const filteredUsers = useMemo(() => {
 return users.filter((user: any) => {

@@ -12,7 +12,13 @@ import TaskProgressChart from "@/components/charts/TaskProgressChart";
 
 export default function Body() {
 
-  const { tasks,  setTasks,  } = useContext(TaskContext)
+  const context = useContext(TaskContext);
+
+if (!context) {
+  throw new Error("Body must be inside TaskProvider");
+}
+
+const { tasks, setTasks } = context;
 
 
   const [selectedDate, setSelectedDate] = useState<Date | undefined>();
