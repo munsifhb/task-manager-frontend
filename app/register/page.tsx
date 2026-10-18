@@ -6,6 +6,7 @@ import Image from "next/image";
 import google from "@/public/images/google-icon-logo-svgrepo-com.svg";
 import Link from "next/link";
 import { Eye, EyeOff, UserPlus, ShieldCheck, ArrowRight } from "lucide-react";
+import { useRouter } from "next/router";
 
 export default function Page() {
   const [name, setName] = useState("");
@@ -15,6 +16,7 @@ export default function Page() {
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
   const [isRegister, setIsregister] = useState(false);
+  const router = useRouter();
 
   const [errors, setErrors] = useState<{
     username?: string;
@@ -75,7 +77,15 @@ export default function Page() {
         return;
       }
 
-      // Registration succeeded. Add your redirect here if needed.
+      // Clear the form fields
+setName("");
+setUsername("");
+setEmail("");
+setPhone("");
+setPassword("");
+
+// Redirect to login
+router.replace("/login");
     } catch {
       setErrors({ general: "Cannot connect to the server." });
     } finally {
