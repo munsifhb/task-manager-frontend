@@ -43,7 +43,7 @@ export default function Page() {
       setIsregister(true);
 
       const response = await fetch(
-        "https://nest-task-manager-api.onrender.com/auth/register",
+        "/api/backend/auth/register",
         {
           method: "POST",
           headers: {

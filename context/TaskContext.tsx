@@ -73,7 +73,7 @@ export default function TaskProvider({
     try {
       setLoading(true);
 
-      let url = "https://nest-task-manager-api.onrender.com/tasks";
+      let url = "/api/backend/tasks";
 
       if (filterTask === "completed") {
         url += "?completed=true";
@@ -117,7 +117,7 @@ export default function TaskProvider({
       setLoading(true);
 
       const response = await fetch(
-        `https://nest-task-manager-api.onrender.com/tasks/search?title=${encodeURIComponent(
+        `/api/backend/tasks/search?title=${encodeURIComponent(
           trimmedSearch
         )}`,
         {
@@ -159,7 +159,7 @@ export default function TaskProvider({
   const logout = async () => {
     try {
       const response = await fetch(
-        "https://nest-task-manager-api.onrender.com/auth/logout",
+        "/api/backend/auth/logout",
         {
           method: "POST",
           credentials: "include",
@@ -191,7 +191,7 @@ export default function TaskProvider({
   ) => {
     try {
       const response = await fetch(
-        `https://nest-task-manager-api.onrender.com/tasks/${id}`,
+        `/api/backend/tasks/${id}`,
         {
           method: "PATCH",
           credentials: "include",
@@ -232,7 +232,7 @@ export default function TaskProvider({
       setIsCreating(true);
 
       const response = await fetch(
-        "https://nest-task-manager-api.onrender.com/tasks",
+        "/api/backend/tasks",
         {
           method: "POST",
           credentials: "include",

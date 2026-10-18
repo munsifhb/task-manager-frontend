@@ -41,7 +41,7 @@ export default function UserProvider({
   const getUsers = async (): Promise<boolean> => {
   try {
     const response = await fetch(
-      "https://nest-task-manager-api.onrender.com/auth/me",
+      "/api/backend/auth/me",
       {
         credentials: "include",
       }
@@ -69,7 +69,7 @@ export default function UserProvider({
   const getAllUsers = async () => {
     try {
       const response = await fetch(
-        "https://nest-task-manager-api.onrender.com/users",
+        "/api/backend/users",
         {
           credentials: "include",
         }

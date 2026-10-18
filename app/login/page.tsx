@@ -40,7 +40,7 @@ export default function page() {
       setIsLogin(true);
 
       const response = await fetch(
-        "https://nest-task-manager-api.onrender.com/auth/login",
+        "/api/backend/auth/login",
         {
           method: "POST",
           credentials: "include",
