@@ -55,7 +55,7 @@ const handleSaveRole = async () => {
 
   try {
     const response = await fetch(
-      `https://nest-task-manager-api.onrender.com/users/${selectedUser.id}/role`,
+      `/api/backend/users/${selectedUser.id}/role`,
       {
         method: "PATCH",
         credentials: "include",
@@ -94,7 +94,7 @@ const handleDeleteUser = async () => {
 
   try {
     const response = await fetch(
-      `https://nest-task-manager-api.onrender.com/users/${deleteUser.id}`,
+      `/api/backend/users/${deleteUser.id}`,
       {
         method: "DELETE",
         credentials: "include",
