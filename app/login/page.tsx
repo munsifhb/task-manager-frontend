@@ -77,10 +77,17 @@ export default function page() {
 
 console.log("Login successful");
 
-await userContext?.getUsers();
+const authenticated = await userContext?.getUsers();
+
+if (!authenticated) {
+  setErrors({
+    general:
+      "Login was accepted, but your session could not be verified. Please try again.",
+  });
+  return;
+}
 
 router.replace("/board");
-router.refresh();
     } catch (err) {
       setErrors({ general: "Cannot connect to the server." });
     } finally {

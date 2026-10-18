@@ -19,7 +19,7 @@ interface User {
 interface UserContextType {
   users: User | null;
   loadingUser: boolean;
-  getUsers: () => Promise<void>;
+  getUsers: () => Promise<boolean>;
 
   allUsers: User[];
   setAllUsers: React.Dispatch<React.SetStateAction<User[]>>;
@@ -38,27 +38,32 @@ export default function UserProvider({
   const [allUsers, setAllUsers] = useState<User[]>([]);
 
   // Get the currently logged-in user
-  const getUsers = async () => {
-    try {
-      const response = await fetch(
-        "https://nest-task-manager-api.onrender.com/auth/me",
-        {
-          credentials: "include",
-        }
-      );
-
-      if (!response.ok) {
-        throw new Error("Failed to fetch user");
+  const getUsers = async (): Promise<boolean> => {
+  try {
+    const response = await fetch(
+      "https://nest-task-manager-api.onrender.com/auth/me",
+      {
+        credentials: "include",
       }
+    );
 
-      const data = await response.json();
-      setUsers(data);
-    } catch (error) {
-      console.error(error);
-    } finally {
-      setLoadingUser(false);
+    if (!response.ok) {
+      setUsers(null);
+      return false;
     }
-  };
+
+    const data: User = await response.json();
+    setUsers(data);
+
+    return true;
+  } catch (error) {
+    console.error("Failed to fetch authenticated user:", error);
+    setUsers(null);
+    return false;
+  } finally {
+    setLoadingUser(false);
+  }
+};
 
   // Get all users
   const getAllUsers = async () => {
