@@ -6,7 +6,7 @@ import Image from "next/image";
 import google from "@/public/images/google-icon-logo-svgrepo-com.svg";
 import Link from "next/link";
 import { Eye, EyeOff, UserPlus, ShieldCheck, ArrowRight } from "lucide-react";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 export default function Page() {
   const [name, setName] = useState("");
