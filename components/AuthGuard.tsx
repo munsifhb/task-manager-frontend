@@ -26,11 +26,14 @@ export default function AuthGuard({
 
   if (loadingUser) {
     return (
-      <div className="flex min-h-screen items-center gap-5">
-        <div className="w-80 bg-gray-100 h-full"></div>
+      <div className="flex min-h-screen w-full items-center gap-5">
+        <div className="w-80 bg-gray-100 h-full">
+          <p className="opacity-0">Side bar</p>
+        </div>
 
         <div className="w-full bg-gray-100  h-full text-gray-500 font-mono text-center">
         Checking authentication...
+        
         </div>
       </div>
     );

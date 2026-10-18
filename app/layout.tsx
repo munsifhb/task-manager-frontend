@@ -17,6 +17,9 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "Task Manager",
   description: "Manage your tasks, track progress, and stay productive.",
+  icons: {
+    icon: "/icon.png",
+  },
 };
 
 export default function RootLayout({
